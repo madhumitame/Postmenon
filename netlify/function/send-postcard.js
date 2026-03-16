@@ -72,7 +72,7 @@ margin: 0;
     <!-- RIGHT: Address area -->
     <div style="
       flex: 1;
-      padding: 0.3in 0.25in;
+      padding: 0.3in 0.25in 0.15in;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -117,6 +117,46 @@ margin: 0;
           ${to.country}
         </p>
       </div>
+
+      <!-- PostaCard branding: logo + QR code -->
+      <div style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid #f0d0da;
+        padding-top: 6px;
+        margin-top: 6px;
+      ">
+        <!-- Logo -->
+        <div>
+          <p style="
+            font-family: Georgia, serif;
+            font-size: 9pt;
+            font-weight: bold;
+            color: #7b1d35;
+            margin: 0 0 1px 0;
+            letter-spacing: -0.3px;
+          ">
+            <span style="color: #ffffff; background:#7b1d35; padding: 1px 3px; border-radius:2px;">Posta</span><span style="color: #d4687e;">Card.</span>
+          </p>
+          <p style="
+            font-size: 6pt;
+            color: #aaa;
+            margin: 0;
+            font-style: italic;
+          ">Send one back! 💌</p>
+        </div>
+
+        <!-- QR Code linking to postacard.netlify.app -->
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=54x54&data=https://postacard.netlify.app/&color=7b1d35&bgcolor=ffffff&margin=2"
+          width="54"
+          height="54"
+          alt="PostaCard QR code"
+          style="border-radius: 4px; border: 1px solid #f0d0da;"
+        />
+      </div>
+
     </div>
   </body>
 </html>
