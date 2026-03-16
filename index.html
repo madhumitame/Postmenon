@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Postmenon — Send Real Postcards</title>
+  <title>Postacard — Send Real Postcards</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -13,11 +13,14 @@
       --burgundy-light: #a3284a;
       --butter: #FFF8DC;
       --butter-dark: #F5E9A0;
-      --cream: #fffdf0;
-      --cream-dark: #f0e4b0;
+      --cream: #fff0f3;
+      --cream-dark: #f5d0da;
+      --rose: #d4687e;
+      --rose-light: #e8a0b0;
+      --rose-pale: #fce4ec;
       --gold: #e8a020;
       --gold-light: #f5c84a;
-      --teal: #2a9d8f;
+      --accent: #c2485e;
       --pink: #f4a0b0;
       --white: #ffffff;
       --text-dark: #2c1a1a;
@@ -26,7 +29,7 @@
       --shadow-lg: 0 20px 60px rgba(123,29,53,0.2);
     }
 
-
+```
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -50,19 +53,14 @@ header {
   box-shadow: 0 4px 20px rgba(123,29,53,0.3);
 }
 
-.logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  font-weight: 900;
-  letter-spacing: -0.5px;
-  color: var(--butter);
-}
-
-.logo span { color: var(--white); }
+.logo { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; letter-spacing: -0.5px; }
+.logo .logo-white { color: var(--white); }
+.logo span { color: var(--rose-light); }
+.logo .logo-dot { color: var(--white); }
 
 .tagline {
   font-size: 0.85rem;
-  color: var(--pink);
+  color: rgba(255,255,255,0.7);
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -134,7 +132,7 @@ header {
 }
 
 .postbox-head::after {
-  content: 'POST';
+  content: 'ROYAL\AMAIL';
   white-space: pre;
   position: absolute;
   top: 50%;
@@ -367,8 +365,8 @@ header {
 }
 
 .step-dot.done .step-circle {
-  background: var(--teal);
-  border-color: var(--teal);
+  background: var(--rose);
+  border-color: var(--rose);
   color: var(--white);
 }
 
@@ -383,7 +381,7 @@ header {
 }
 
 .step-dot.active .step-label { color: var(--burgundy); opacity: 1; }
-.step-dot.done .step-label { color: var(--teal); opacity: 1; }
+.step-dot.done .step-label { color: var(--rose); opacity: 1; }
 
 .step-line {
   flex: 1;
@@ -395,7 +393,7 @@ header {
   transition: background 0.3s, opacity 0.3s;
 }
 
-.step-line.done { background: var(--teal); opacity: 1; }
+.step-line.done { background: var(--rose); opacity: 1; }
 
 /* ── MAIN CARD ── */
 .main-card {
@@ -415,7 +413,7 @@ header {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 6px;
-  background: linear-gradient(90deg, var(--burgundy), var(--gold), var(--teal), var(--pink), var(--burgundy));
+  background: linear-gradient(90deg, var(--burgundy), var(--rose), var(--rose-light), var(--pink), var(--burgundy));
   background-size: 200% 100%;
   animation: shimmer 4s linear infinite;
 }
@@ -578,9 +576,9 @@ header {
 }
 
 .toggle-btn.active {
-  background: var(--burgundy);
+  background: var(--rose);
   color: white;
-  border-color: var(--burgundy);
+  border-color: var(--rose);
 }
 
 /* ── IMAGE UPLOAD ── */
@@ -839,9 +837,9 @@ textarea {
 }
 
 .btn-gold {
-  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  background: linear-gradient(135deg, var(--rose), var(--rose-light));
   color: var(--white);
-  box-shadow: 0 4px 16px rgba(232,160,32,0.4);
+  box-shadow: 0 4px 16px rgba(212,104,126,0.4);
   width: 100%;
   margin-top: 8px;
   font-size: 1.1rem;
@@ -849,7 +847,7 @@ textarea {
 
 .btn-gold:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(232,160,32,0.5);
+  box-shadow: 0 8px 28px rgba(212,104,126,0.5);
 }
 
 .btn-gold:disabled {
@@ -991,8 +989,8 @@ footer a { color: var(--burgundy); text-decoration: none; }
   <!-- HEADER -->
 
   <header>
-    <div class="logo">Postie<span>.</span></div>
-    <div class="tagline">✉️ Real postcards, no stamps needed</div>
+    <div class="logo"><span class="logo-white">Posta</span><span>Card</span><span class="logo-dot">.</span></div>
+    <div class="tagline">💌 Real postcards, delivered with love</div>
   </header>
 
   <!-- HERO -->
@@ -1193,8 +1191,8 @@ footer a { color: var(--burgundy); text-decoration: none; }
 
   <div class="btn-row">
     <button class="btn btn-secondary" onclick="goToStep(2)">← Back</button>
-    <button class="btn btn-gold" id="sendBtn" onclick="sendPostcard()" style="flex:1">
-      🚀 Send my postcard!
+    <button class="btn btn-gold" id="sendBtn" onclick="goToPayment()" style="flex:1">
+      💳 Pay $2.00 & Send!
     </button>
   </div>
 </div>
@@ -1216,7 +1214,15 @@ footer a { color: var(--burgundy); text-decoration: none; }
   </div>
 
   <footer>
-    Made with 💛 by Postie &nbsp;·&nbsp; Powered by <a href="https://lob.com" target="_blank">Lob</a>
+    Made with 🌸 by Postacard &nbsp;·&nbsp; Powered by <a href="https://lob.com" target="_blank">Lob</a> &nbsp;·&nbsp;
+    <a href="https://instagram.com/_postmenon_" target="_blank" style="display:inline-flex; align-items:center; gap:5px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+      </svg>
+      @_postmenon_
+    </a>
   </footer>
 
   <script>
@@ -1394,13 +1400,13 @@ footer a { color: var(--burgundy); text-decoration: none; }
       document.getElementById('previewFrom').textContent = this.value ? '— From ' + this.value + ' 💛' : '— From you, with love 💛';
     });
 
-    // ── SEND POSTCARD ──
-    async function sendPostcard() {
+    // ── GO TO STRIPE PAYMENT ──
+    async function goToPayment() {
       if (!validateStep(3)) return;
 
       const btn = document.getElementById('sendBtn');
       btn.disabled = true;
-      btn.textContent = '📮 Sending...';
+      btn.textContent = '⏳ Setting up payment...';
       document.getElementById('errorMsg').classList.remove('show');
 
       const payload = {
@@ -1424,23 +1430,73 @@ footer a { color: var(--burgundy); text-decoration: none; }
         }
       };
 
+      // Save postcard data to sessionStorage so we can send it after payment
+      sessionStorage.setItem('postcardPayload', JSON.stringify(payload));
+
       try {
-        const res = await fetch('/api/send-postcard', {
+        const res = await fetch('/api/create-payment', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
 
         const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Payment setup failed');
 
-        if (!res.ok) throw new Error(data.error || 'Unknown error');
+        // Redirect to Stripe Checkout
+        window.location.href = data.url;
 
-        // Success!
-        animateEnvelope();
-        setTimeout(() => {
-          document.getElementById('postcardId').textContent = data.id || 'POSTIE-' + Date.now();
-          document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-          document.getElementById('panelSuccess').classList.add('active');
+      } catch (err) {
+        const errEl = document.getElementById('errorMsg');
+        errEl.textContent = '⚠️ ' + (err.message || 'Something went wrong. Please try again.');
+        errEl.classList.add('show');
+        btn.disabled = false;
+        btn.textContent = '💳 Pay $1.50 & Send!';
+      }
+    }
+
+    // ── HANDLE RETURN FROM STRIPE ──
+    // After successful payment Stripe redirects back with ?session_id=...
+    // We then automatically send the postcard
+    async function handleStripeReturn() {
+      const params = new URLSearchParams(window.location.search);
+      const sessionId = params.get('session_id');
+      const cancelled = params.get('cancelled');
+
+      // Clean up the URL
+      window.history.replaceState({}, document.title, '/');
+
+      if (cancelled) {
+        // User cancelled payment — show a gentle message
+        alert('Payment cancelled. Your postcard details are still saved — just click Pay again when you\'re ready! 💌');
+        return;
+      }
+
+      if (sessionId) {
+        // Payment succeeded — retrieve saved postcard data and send it
+        const saved = sessionStorage.getItem('postcardPayload');
+        if (!saved) return;
+
+        const payload = JSON.parse(saved);
+        sessionStorage.removeItem('postcardPayload');
+
+        // Show sending state
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        document.getElementById('panelSuccess').classList.add('active');
+        document.getElementById('postcardId').textContent = '⏳ Sending your postcard...';
+
+        try {
+          const res = await fetch('/api/send-postcard', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || 'Send failed');
+
+          // All done!
+          document.getElementById('postcardId').textContent = data.id || 'POSTACARD-' + Date.now();
           [1,2,3].forEach(i => {
             const dot = document.getElementById('step' + i + 'dot');
             dot.classList.remove('active');
@@ -1448,17 +1504,17 @@ footer a { color: var(--burgundy); text-decoration: none; }
           });
           document.getElementById('line1').classList.add('done');
           document.getElementById('line2').classList.add('done');
+          animateEnvelope();
           launchConfetti();
-        }, 1400);
 
-      } catch (err) {
-        const errEl = document.getElementById('errorMsg');
-        errEl.textContent = '⚠️ ' + (err.message || 'Something went wrong. Please try again.');
-        errEl.classList.add('show');
-        btn.disabled = false;
-        btn.textContent = '🚀 Send my postcard!';
+        } catch (err) {
+          document.getElementById('postcardId').textContent = '⚠️ Paid but send failed — please contact us!';
+        }
       }
     }
+
+    // Run on page load to check if returning from Stripe
+    handleStripeReturn();
 
     // ── ENVELOPE ANIMATION ──
     function animateEnvelope() {
