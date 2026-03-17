@@ -405,7 +405,9 @@ header {
   padding: 36px 32px;
   position: relative;
   z-index: 1;
-  overflow: hidden;
+  overflow: visible;
+  box-sizing: border-box;
+  width: calc(100% - 32px);
 }
 
 .main-card::before {
@@ -413,9 +415,11 @@ header {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 6px;
+  border-radius: 24px 24px 0 0;
   background: linear-gradient(90deg, var(--burgundy), var(--rose), var(--rose-light), var(--pink), var(--burgundy));
   background-size: 200% 100%;
   animation: shimmer 4s linear infinite;
+  overflow: hidden;
 }
 
 @keyframes shimmer {
@@ -975,7 +979,7 @@ footer a { color: var(--burgundy); text-decoration: none; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 600px) {
-  .main-card { margin: 0 16px 40px; padding: 28px 20px; }
+  .main-card { margin: 0 12px 40px; padding: 24px 16px; width: calc(100% - 24px); }
   .two-col { grid-template-columns: 1fr; }
   .btn-row { flex-direction: column; }
   header { padding: 14px 20px; }
@@ -986,7 +990,7 @@ footer a { color: var(--burgundy); text-decoration: none; }
 /* iPad portrait and similar mid-size screens */
 @media (max-width: 820px) {
   .two-col { grid-template-columns: 1fr; }
-  .main-card { margin: 0 20px 40px; }
+  .main-card { margin: 0 20px 40px; padding: 28px 20px; width: calc(100% - 40px); }
 }
 ```
 
@@ -1135,8 +1139,12 @@ footer a { color: var(--burgundy); text-decoration: none; }
     <input type="text" id="toName" placeholder="e.g. Sarah Johnson" />
   </div>
   <div class="form-group">
-    <label for="toAddress">Street address</label>
+    <label for="toAddress">Street address line 1</label>
     <input type="text" id="toAddress" placeholder="e.g. 42 Maple Street" />
+  </div>
+  <div class="form-group">
+    <label for="toAddress2">Street address line 2 <span style="font-weight:600; text-transform:none; font-size:0.75rem; opacity:0.6;">(optional)</span></label>
+    <input type="text" id="toAddress2" placeholder="e.g. Flat 2, Rose House" />
   </div>
   <div class="two-col">
     <div class="form-group">
@@ -1206,8 +1214,12 @@ footer a { color: var(--burgundy); text-decoration: none; }
     <input type="text" id="fromName" placeholder="e.g. James Carter" />
   </div>
   <div class="form-group">
-    <label for="fromAddress">Your street address</label>
-    <input type="text" id="fromAddress" placeholder="e.g. 10 Park Avenue" />
+    <label for="fromAddress">Street address line 1</label>
+    <input type="text" id="fromAddress" placeholder="e.g. 87 Hearsall Lane" />
+  </div>
+  <div class="form-group">
+    <label for="fromAddress2">Street address line 2 <span style="font-weight:600; text-transform:none; font-size:0.75rem; opacity:0.6;">(optional)</span></label>
+    <input type="text" id="fromAddress2" placeholder="e.g. Flat 4, Wells Terrace" />
   </div>
   <div class="two-col">
     <div class="form-group">
@@ -1491,6 +1503,7 @@ footer a { color: var(--burgundy); text-decoration: none; }
         to: {
           name: document.getElementById('toName').value.trim(),
           address: document.getElementById('toAddress').value.trim(),
+          address2: document.getElementById('toAddress2').value.trim(),
           city: document.getElementById('toCity').value.trim(),
           state: document.getElementById('toState').value.trim(),
           zip: document.getElementById('toZip').value.trim(),
@@ -1499,6 +1512,7 @@ footer a { color: var(--burgundy); text-decoration: none; }
         from: {
           name: document.getElementById('fromName').value.trim(),
           address: document.getElementById('fromAddress').value.trim(),
+          address2: document.getElementById('fromAddress2').value.trim(),
           city: document.getElementById('fromCity').value.trim(),
           state: document.getElementById('fromState').value.trim(),
           zip: document.getElementById('fromZip').value.trim(),
