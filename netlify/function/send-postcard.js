@@ -31,6 +31,32 @@ body: JSON.stringify({ error: “Missing required fields: message, to, or from�
 };
 }
 
+// Sanitise address fields — Lob is strict about special characters
+// Remove anything that isn’t letters, numbers, spaces, commas, hyphens or periods
+function sanitise(str) {
+if (!str) return “”;
+return str.trim().replace(/[^a-zA-Z0-9\s,.-#/]/g, “”).trim();
+}
+
+// Sanitise all address fields
+const cleanTo = {
+name: to.name ? to.name.trim() : “”,
+address: sanitise(to.address),
+city: sanitise(to.city),
+state: sanitise(to.state || “”),
+zip: to.zip ? to.zip.trim().replace(/\s+/g, “ “) : “”,
+country: to.country ? to.country.trim() : “”,
+};
+
+const cleanFrom = {
+name: from.name ? from.name.trim() : “”,
+address: sanitise(from.address),
+city: sanitise(from.city),
+state: sanitise(from.state || “”),
+zip: from.zip ? from.zip.trim().replace(/\s+/g, “ “) : “”,
+country: from.country ? from.country.trim() : “”,
+};
+
 // Build the postcard back HTML
 // This is what gets printed on the message side of the postcard
 const backHTML = `
@@ -66,7 +92,7 @@ margin: 0;
         color: #7b1d35;
         font-weight: bold;
         margin: 0;
-      ">— ${from.name} 💛</p>
+      ">— ${cleanFrom.name} 💛</p>
     </div>
 
     <!-- RIGHT: Address area -->
@@ -105,16 +131,16 @@ margin: 0;
           font-weight: bold;
           color: #2c1a1a;
           margin: 0 0 4px 0;
-        ">${to.name}</p>
+        ">${cleanTo.name}</p>
         <p style="
           font-size: 9pt;
           color: #555;
           line-height: 1.5;
           margin: 0;
         ">
-          ${to.address}<br/>
-          ${to.city}${to.state ? ", " + to.state : ""} ${to.zip}<br/>
-          ${to.country}
+          ${cleanTo.address}<br/>
+          ${cleanTo.city}${cleanTo.state ? ", " + cleanTo.state : ""} ${cleanTo.zip}<br/>
+          ${cleanTo.country}
         </p>
       </div>
 
@@ -172,22 +198,22 @@ const frontContent = frontImage
 
 try {
 const postcard = await Lob.postcards.create({
-description: `Postcard from ${from.name} to ${to.name}`,
+description: `Postcard from ${cleanFrom.name} to ${cleanTo.name}`,
 to: {
-name: to.name,
-address_line1: to.address,
-address_city: to.city,
-address_state: to.state || “”,
-address_zip: to.zip,
-address_country: to.country,
+name: cleanTo.name,
+address_line1: cleanTo.address,
+address_city: cleanTo.city,
+address_state: cleanTo.state,
+address_zip: cleanTo.zip,
+address_country: cleanTo.country,
 },
 from: {
-name: from.name,
-address_line1: from.address,
-address_city: from.city,
-address_state: from.state || “”,
-address_zip: from.zip,
-address_country: from.country,
+name: cleanFrom.name,
+address_line1: cleanFrom.address,
+address_city: cleanFrom.city,
+address_state: cleanFrom.state,
+address_zip: cleanFrom.zip,
+address_country: cleanFrom.country,
 },
 front: frontContent,
 back: backHTML,
