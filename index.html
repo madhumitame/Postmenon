@@ -982,6 +982,12 @@ footer a { color: var(--burgundy); text-decoration: none; }
   .logo { font-size: 1.6rem; }
   .postbox-scene { gap: 12px; }
 }
+
+/* iPad portrait and similar mid-size screens */
+@media (max-width: 820px) {
+  .two-col { grid-template-columns: 1fr; }
+  .main-card { margin: 0 20px 40px; }
+}
 ```
 
   </style>
@@ -1149,7 +1155,38 @@ footer a { color: var(--burgundy); text-decoration: none; }
     </div>
     <div class="form-group">
       <label for="toCountry">Country</label>
-      <input type="text" id="toCountry" placeholder="e.g. United Kingdom" />
+      <select id="toCountry">
+        <option value="">Select a country...</option>
+        <option value="IN">India</option>
+        <option value="US">United States</option>
+        <option value="GB">United Kingdom</option>
+        <option value="AU">Australia</option>
+        <option value="CA">Canada</option>
+        <option value="DE">Germany</option>
+        <option value="FR">France</option>
+        <option value="IT">Italy</option>
+        <option value="ES">Spain</option>
+        <option value="NL">Netherlands</option>
+        <option value="SE">Sweden</option>
+        <option value="NO">Norway</option>
+        <option value="DK">Denmark</option>
+        <option value="FI">Finland</option>
+        <option value="CH">Switzerland</option>
+        <option value="AT">Austria</option>
+        <option value="BE">Belgium</option>
+        <option value="PT">Portugal</option>
+        <option value="IE">Ireland</option>
+        <option value="NZ">New Zealand</option>
+        <option value="SG">Singapore</option>
+        <option value="AE">United Arab Emirates</option>
+        <option value="JP">Japan</option>
+        <option value="HK">Hong Kong</option>
+        <option value="MY">Malaysia</option>
+        <option value="ZA">South Africa</option>
+        <option value="BR">Brazil</option>
+        <option value="MX">Mexico</option>
+        <option value="AR">Argentina</option>
+      </select>
     </div>
   </div>
 
@@ -1189,7 +1226,38 @@ footer a { color: var(--burgundy); text-decoration: none; }
     </div>
     <div class="form-group">
       <label for="fromCountry">Country</label>
-      <input type="text" id="fromCountry" placeholder="e.g. United States" />
+      <select id="fromCountry">
+        <option value="">Select a country...</option>
+        <option value="IN">India</option>
+        <option value="US">United States</option>
+        <option value="GB">United Kingdom</option>
+        <option value="AU">Australia</option>
+        <option value="CA">Canada</option>
+        <option value="DE">Germany</option>
+        <option value="FR">France</option>
+        <option value="IT">Italy</option>
+        <option value="ES">Spain</option>
+        <option value="NL">Netherlands</option>
+        <option value="SE">Sweden</option>
+        <option value="NO">Norway</option>
+        <option value="DK">Denmark</option>
+        <option value="FI">Finland</option>
+        <option value="CH">Switzerland</option>
+        <option value="AT">Austria</option>
+        <option value="BE">Belgium</option>
+        <option value="PT">Portugal</option>
+        <option value="IE">Ireland</option>
+        <option value="NZ">New Zealand</option>
+        <option value="SG">Singapore</option>
+        <option value="AE">United Arab Emirates</option>
+        <option value="JP">Japan</option>
+        <option value="HK">Hong Kong</option>
+        <option value="MY">Malaysia</option>
+        <option value="ZA">South Africa</option>
+        <option value="BR">Brazil</option>
+        <option value="MX">Mexico</option>
+        <option value="AR">Argentina</option>
+      </select>
     </div>
   </div>
 
@@ -1388,17 +1456,19 @@ footer a { color: var(--burgundy); text-decoration: none; }
       document.getElementById('previewToName').textContent = this.value || 'Recipient Name';
     });
 
-    ['toAddress', 'toCity', 'toState', 'toZip', 'toCountry'].forEach(id => {
+    ['toAddress', 'toCity', 'toState', 'toZip'].forEach(id => {
       document.getElementById(id).addEventListener('input', updateAddrPreview);
     });
+    document.getElementById('toCountry').addEventListener('change', updateAddrPreview);
 
     function updateAddrPreview() {
       const addr = document.getElementById('toAddress').value;
       const city = document.getElementById('toCity').value;
       const state = document.getElementById('toState').value;
       const zip = document.getElementById('toZip').value;
-      const country = document.getElementById('toCountry').value;
-      const parts = [addr, city, state, zip, country].filter(Boolean);
+      const countrySelect = document.getElementById('toCountry');
+      const country = countrySelect.options[countrySelect.selectedIndex]?.text || '';
+      const parts = [addr, city, state, zip, country === 'Select a country...' ? '' : country].filter(Boolean);
       document.getElementById('previewAddr').textContent = parts.join(', ') || 'Their address will show here';
     }
 
@@ -1457,7 +1527,7 @@ footer a { color: var(--burgundy); text-decoration: none; }
         errEl.textContent = '⚠️ ' + (err.message || 'Something went wrong. Please try again.');
         errEl.classList.add('show');
         btn.disabled = false;
-        btn.textContent = '💳 Pay $1.50 & Send!';
+        btn.textContent = '💳 Pay $2.00 & Send!';
       }
     }
 
