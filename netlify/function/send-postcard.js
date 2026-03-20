@@ -32,10 +32,41 @@ body: JSON.stringify({ error: “Missing required fields: message, to, or from�
 }
 
 // Sanitise address fields — Lob is strict about special characters
-// Remove anything that isn’t letters, numbers, spaces, commas, hyphens or periods
 function sanitise(str) {
 if (!str) return “”;
 return str.trim().replace(/[^a-zA-Z0-9\s,.-#/]/g, “”).trim();
+}
+
+// Format postcode correctly based on country
+// Lob requires postcodes to match the country’s official format
+function formatZip(zip, country) {
+if (!zip) return “”;
+const z = zip.trim().toUpperCase().replace(/\s+/g, “”);
+
+```
+if (country === "GB") {
+  // UK postcodes: must have a space before last 3 characters e.g. CV5 6HF
+  if (z.length >= 5) {
+    return z.slice(0, z.length - 3) + " " + z.slice(z.length - 3);
+  }
+}
+
+if (country === "IN") {
+  // India: 6 digit numeric PIN code — no spaces needed
+  return z.replace(/[^0-9]/g, "").slice(0, 6);
+}
+
+if (country === "CA") {
+  // Canada: A1A 1A1 format
+  if (z.length === 6) {
+    return z.slice(0, 3) + " " + z.slice(3);
+  }
+}
+
+// Default: just return trimmed uppercase
+return z;
+```
+
 }
 
 // Sanitise all address fields
@@ -45,7 +76,7 @@ address: sanitise(to.address),
 address2: sanitise(to.address2 || “”),
 city: sanitise(to.city),
 state: sanitise(to.state || “”),
-zip: to.zip ? to.zip.trim().replace(/\s+/g, “ “) : “”,
+zip: formatZip(to.zip, to.country),
 country: to.country ? to.country.trim() : “”,
 };
 
@@ -55,7 +86,7 @@ address: sanitise(from.address),
 address2: sanitise(from.address2 || “”),
 city: sanitise(from.city),
 state: sanitise(from.state || “”),
-zip: from.zip ? from.zip.trim().replace(/\s+/g, “ “) : “”,
+zip: formatZip(from.zip, from.country),
 country: from.country ? from.country.trim() : “”,
 };
 
