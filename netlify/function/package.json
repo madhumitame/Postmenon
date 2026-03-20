@@ -1,0 +1,9 @@
+{
+  "name": "postacard-functions",
+  "version": "1.0.0",
+  "description": "Netlify functions for PostaCard.",
+  "dependencies": {
+    "lob": "^5.2.0",
+    "stripe": "^14.0.0"
+  }
+}
