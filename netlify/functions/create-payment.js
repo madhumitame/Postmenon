@@ -33,6 +33,10 @@ exports.handler = async function(event) {
         quantity: 1
       }],
       mode: "payment",
+
+      metadata: {
+        postcard: JSON.stringify(data)
+      },
       //success_url: baseUrl + "/success?session_id={CHECKOUT_SESSION_ID}",
       success_url: baseUrl + "/?success=true",
       cancel_url: baseUrl + "/?cancelled=true"
