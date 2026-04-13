@@ -1,3 +1,4 @@
+'''
 const Lob = require(“lob”)(process.env.LOB_API_KEY);
 
 exports.handler = async (event) => {
@@ -276,3 +277,4 @@ error: err.message || “Something went wrong sending your postcard”
 };
 }
 };
+'''
