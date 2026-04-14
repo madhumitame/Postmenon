@@ -68,7 +68,7 @@ exports.handler = async function(event) {
         from:  fromAddress,
         front: frontHtml,
         back:  backHtml,
-        size:  "4x6"
+        size:  "4x6",
         mail_type: "first_class"
       });
       console.log("Postcard created! Lob ID:", postcard.id);
