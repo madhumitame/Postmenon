@@ -1006,6 +1006,7 @@ footer a { color: var(--burgundy); text-decoration: none; }
   <header>
     <div class="logo"><span class="logo-white">Posta</span><span>Card</span><span class="logo-dot">.</span></div>
     <div class="tagline">💌 Real postcards, delivered with love</div>
+    <button onclick="openAbout()" style="background:rgba(255,255,255,0.15); border:2px solid rgba(255,255,255,0.4); color:white; font-family:'Nunito',sans-serif; font-weight:800; font-size:0.8rem; padding:7px 16px; border-radius:20px; cursor:pointer; letter-spacing:0.5px;">About 🌸</button>
   </header>
 
   <!-- HERO -->
@@ -1306,6 +1307,77 @@ footer a { color: var(--burgundy); text-decoration: none; }
       </svg>
       @_postmenon_
     </a>
+    <!-- ABOUT MODAL -->
+    <div id="aboutModal" onclick="closeAbout(event)" style="display:none; position:fixed; inset:0; background:rgba(44,26,26,0.55); z-index:999; align-items:center; justify-content:center; padding:24px;">
+      <div style="background:white; border-radius:24px; max-width:480px; width:100%; padding:36px 28px; position:relative; box-shadow:0 20px 60px rgba(123,29,53,0.25); animation:fadeSlide 0.4s ease; max-height:90vh; overflow-y:auto;">
+    
+        <div style="position:absolute; top:0; left:0; right:0; height:5px; border-radius:24px 24px 0 0; background:linear-gradient(90deg,#7b1d35,#d4687e,#f5c84a,#e8a0b0,#7b1d35);"></div>
+    
+        <button onclick="closeAbout()" style="position:absolute; top:16px; right:16px; background:rgba(123,29,53,0.08); border:none; width:32px; height:32px; border-radius:50%; font-size:1rem; cursor:pointer; color:#7b1d35; font-weight:800;">✕</button>
+    
+        <!-- Top -->
+        <div style="text-align:center; margin-bottom:24px;">
+          <div style="font-size:3rem; margin-bottom:8px;">🌸</div>
+          <div style="font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:900; color:#560d22; margin-bottom:4px;">Hey, I'm Madhumita!</div>
+          <div style="font-size:0.78rem; font-weight:700; color:#d4687e; letter-spacing:1.5px; text-transform:uppercase;">Builder · Writer · Postcard Lover</div>
+        </div>
+    
+        <!-- Story -->
+        <div style="background:#fff8f0; border-radius:14px; padding:20px; margin-bottom:18px; border-left:4px solid #d4687e; position:relative;">
+          <div style="position:absolute; top:-12px; right:16px; font-size:1.4rem;">💌</div>
+          <p style="font-size:0.93rem; color:#2c1a1a; line-height:1.8; font-weight:600; font-family:'Nunito',sans-serif;">
+            So many of my friends collect postcards as souvenirs when they travel — and it got me thinking.💌 <br>
+            Letting my friend know I thought of her when I saw a sunset at St Ives beach through a <em style="color:#d4687e;">text message</em> just isn't cutting it. And sending an actual postcard from abroad? Time constraints, language barriers, it's a whole thing.<br><br>
+            So I built <strong style="color:#7b1d35;">PostaCard</strong> — come back home and send your own personalised postcard to anyone around the world. Hope you like it! 🌍
+          </p>
+        </div>
+    
+        <!-- Links -->
+        <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
+    
+          <a href="https://open.substack.com/pub/postmenon" target="_blank" style="display:flex; align-items:center; gap:12px; padding:12px 16px; background:#fff8dc; border-radius:12px; text-decoration:none; border:2px solid #f5e9a0;">
+            <span style="font-size:1.4rem;">✍️</span>
+            <div style="flex:1;">
+              <div style="font-weight:800; color:#560d22; font-size:0.9rem;">I write on Substack</div>
+              <div style="font-size:0.73rem; color:#6b3a3a; font-weight:600;">postmenon</div>
+            </div>
+            <span style="color:#d4687e; font-weight:800;">→</span>
+          </a>
+    
+          <a href="https://www.amazon.com/Patchwork-Rolling-Sky-Madhumita-Menon/dp/B0FDRVY2C8" target="_blank" style="display:flex; align-items:center; gap:12px; padding:12px 16px; background:#fff8f0; border-radius:12px; text-decoration:none; border:2px solid #ffd9a0;">
+            <span style="font-size:1.4rem;">📖</span>
+            <div style="flex:1;">
+              <div style="font-weight:800; color:#560d22; font-size:0.9rem;">Read my book</div>
+              <div style="font-size:0.73rem; color:#6b3a3a; font-weight:600;">Patchwork of a Rolling Sky — on Amazon</div>
+            </div>
+            <span style="color:#d4687e; font-weight:800;">→</span>
+          </a>
+    
+          <a href="https://instagram.com/_postmenon_" target="_blank" style="display:flex; align-items:center; gap:12px; padding:12px 16px; background:linear-gradient(135deg,#fff0f3,#fce4ec); border-radius:12px; text-decoration:none; border:2px solid #f5d0da;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4687e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#d4687e" stroke="none"/></svg>
+            <div style="flex:1;">
+              <div style="font-weight:800; color:#560d22; font-size:0.9rem;">Say hello on Instagram!</div>
+              <div style="font-size:0.73rem; color:#6b3a3a; font-weight:600;">DM me @_postmenon_ — I'd love to hear from you 💌</div>
+            </div>
+            <span style="color:#d4687e; font-weight:800;">→</span>
+          </a>
+    
+        </div>
+    
+        <!-- Send me a postcard -->
+        <button onclick="alert('Coming soon! 🌸')" style="display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:14px; background:linear-gradient(135deg,#7b1d35,#d4687e); border-radius:12px; font-family:'Nunito',sans-serif; font-weight:800; font-size:1rem; color:white; box-shadow:0 4px 16px rgba(123,29,53,0.3); border:none; cursor:pointer; margin-bottom:8px;">
+          💌 Send Madhumita a postcard!
+        </button>
+        <div style="text-align:center; font-size:0.75rem; color:#6b3a3a; font-weight:600; font-style:italic; margin-bottom:16px;">Your address stays private — only the postcard reaches me 🤫</div>
+    
+        <!-- Buy Me a Coffee -->
+        <a href="https://buymeacoffee.com/menon" target="_blank" style="display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:14px; background:linear-gradient(135deg,#FFDD00,#FFC300); border-radius:12px; text-decoration:none; font-family:'Nunito',sans-serif; font-weight:800; font-size:1rem; color:#2c1a1a; box-shadow:0 4px 16px rgba(255,195,0,0.4);">
+          ☕ Buy me a coffee
+        </a>
+    
+      </div>
+    </div>
+
   </footer>
 
   <script>
@@ -1677,6 +1749,18 @@ footer a { color: var(--burgundy); text-decoration: none; }
       window.history.replaceState({}, document.title, "/");
     }
   })();
+  
+  function openAbout() {
+  const modal = document.getElementById('aboutModal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  }
+
+  function closeAbout(e) {
+    if (e && e.target !== document.getElementById('aboutModal')) return;
+    document.getElementById('aboutModal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
 
 </script>
 
