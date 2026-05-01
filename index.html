@@ -1307,6 +1307,38 @@ footer a { color: var(--burgundy); text-decoration: none; }
       </svg>
       @_postmenon_
     </a>
+
+    <!-- SEND TO OWNER MODAL -->
+  <div id="ownerModal" onclick="closeOwnerModal(event)" style="display:none; position:fixed; inset:0; background:rgba(44,26,26,0.55); z-index:1000; align-items:center; justify-content:center; padding:24px;">
+    <div style="background:white; border-radius:24px; max-width:440px; width:100%; padding:36px 28px; position:relative; box-shadow:0 20px 60px rgba(123,29,53,0.25);">
+  
+      <div style="position:absolute; top:0; left:0; right:0; height:5px; border-radius:24px 24px 0 0; background:linear-gradient(90deg,#7b1d35,#d4687e,#f5c84a,#e8a0b0,#7b1d35);"></div>
+  
+      <button onclick="closeOwnerModal()" style="position:absolute; top:16px; right:16px; background:rgba(123,29,53,0.08); border:none; width:32px; height:32px; border-radius:50%; font-size:1rem; cursor:pointer; color:#7b1d35; font-weight:800;">✕</button>
+  
+      <div style="text-align:center; margin-bottom:24px;">
+        <div style="font-size:2.5rem; margin-bottom:8px;">💌</div>
+        <div style="font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:900; color:#560d22; margin-bottom:4px;">Send me a postcard!</div>
+        <div style="font-size:0.82rem; color:#6b3a3a; font-weight:600;">Write a message and I'll receive a real postcard 🌍<br/>Your address stays completely private.</div>
+      </div>
+  
+      <div style="margin-bottom:16px;">
+        <label style="display:block; font-size:0.78rem; font-weight:800; color:#560d22; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px;">Your message to Madhumita</label>
+        <textarea id="ownerMessage" placeholder="Hey Madhumita! I found your app and just had to send you a postcard... 💌" maxlength="300" style="width:100%; padding:12px 16px; border:2.5px solid #f5d0da; border-radius:10px; font-family:'Nunito',sans-serif; font-size:0.95rem; color:#2c1a1a; min-height:100px; outline:none; resize:vertical;"></textarea>
+        <div style="font-size:0.75rem; color:#6b3a3a; text-align:right; margin-top:4px; font-weight:600;" id="ownerCharCount">0 / 300</div>
+      </div>
+  
+      <div style="background:#fff8f0; border-radius:12px; padding:14px 16px; margin-bottom:20px; font-size:0.82rem; color:#6b3a3a; font-weight:600; border:2px dashed #f5d0da;">
+        🙋 We'll also need <strong style="color:#7b1d35;">your address</strong> so it can go on the back of the postcard — you'll enter it on the next screen.
+      </div>
+  
+      <button id="ownerPayBtn" onclick="goToOwnerPayment()" style="display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:14px; background:linear-gradient(135deg,#7b1d35,#d4687e); border-radius:12px; font-family:'Nunito',sans-serif; font-weight:800; font-size:1.05rem; color:white; box-shadow:0 4px 16px rgba(123,29,53,0.3); border:none; cursor:pointer;">
+        💳 Pay $2.00 & Send!
+      </button>
+  
+    </div>
+  </div>
+
     <!-- ABOUT MODAL -->
     <div id="aboutModal" onclick="closeAbout(event)" style="display:none; position:fixed; inset:0; background:rgba(44,26,26,0.55); z-index:999; align-items:center; justify-content:center; padding:24px;">
       <div style="background:white; border-radius:24px; max-width:480px; width:100%; padding:36px 28px; position:relative; box-shadow:0 20px 60px rgba(123,29,53,0.25); animation:fadeSlide 0.4s ease; max-height:90vh; overflow-y:auto;">
@@ -1365,10 +1397,10 @@ footer a { color: var(--burgundy); text-decoration: none; }
         </div>
     
         <!-- Send me a postcard -->
-        <button onclick="alert('Coming soon! 🌸')" style="display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:14px; background:linear-gradient(135deg,#7b1d35,#d4687e); border-radius:12px; font-family:'Nunito',sans-serif; font-weight:800; font-size:1rem; color:white; box-shadow:0 4px 16px rgba(123,29,53,0.3); border:none; cursor:pointer; margin-bottom:8px;">
+        <button onclick="openOwnerModal()" style="display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:14px; background:linear-gradient(135deg,#7b1d35,#d4687e); border-radius:12px; font-family:'Nunito',sans-serif; font-weight:800; font-size:1rem; color:white; box-shadow:0 4px 16px rgba(123,29,53,0.3); border:none; cursor:pointer; margin-bottom:8px;">
           💌 Send Madhumita a postcard!
         </button>
-        <div style="text-align:center; font-size:0.75rem; color:#6b3a3a; font-weight:600; font-style:italic; margin-bottom:16px;">Your address stays private — only the postcard reaches me 🤫</div>
+        <div style="text-align:center; font-size:0.75rem; color:#6b3a3a; font-weight:600; font-style:italic; margin-bottom:16px;">Because I would love recieving some awesome postcards from around the world!</div>
     
         <!-- Buy Me a Coffee -->
         <a href="https://buymeacoffee.com/menon" target="_blank" style="display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:14px; background:linear-gradient(135deg,#FFDD00,#FFC300); border-radius:12px; text-decoration:none; font-family:'Nunito',sans-serif; font-weight:800; font-size:1rem; color:#2c1a1a; box-shadow:0 4px 16px rgba(255,195,0,0.4);">
@@ -1761,6 +1793,108 @@ footer a { color: var(--burgundy); text-decoration: none; }
     document.getElementById('aboutModal').style.display = 'none';
     document.body.style.overflow = '';
   }
+
+  // ── OWNER POSTCARD MODAL ──
+  function openOwnerModal() {
+    closeAbout();
+    document.getElementById('ownerModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function closeOwnerModal(e) {
+    if (e && e.target !== document.getElementById('ownerModal')) return;
+    document.getElementById('ownerModal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  
+  document.getElementById('ownerMessage').addEventListener('input', function() {
+    document.getElementById('ownerCharCount').textContent = this.value.length + ' / 300';
+  });
+  
+  async function goToOwnerPayment() {
+    const message = document.getElementById('ownerMessage').value.trim();
+    if (!message) {
+      alert('Please write a message first! 💌');
+      return;
+    }
+  
+    const btn = document.getElementById('ownerPayBtn');
+    btn.disabled = true;
+    btn.textContent = '⏳ Setting up payment...';
+  
+    // We need their sender address — reuse the existing form flow
+    // Store the message and flag, then redirect to step 3 of main form
+    sessionStorage.setItem('ownerPostcard', JSON.stringify({ message }));
+    closeOwnerModal();
+  
+    // Show a friendly prompt to fill in their address
+    alert('Almost there! Fill in your name and address on the next screen so it can go on the back of your postcard 💌');
+  
+    // Take them to step 3 of the main form (sender details)
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel3').classList.add('active');
+    document.getElementById('panel3').querySelector('.panel-title').textContent = '🙋 Your details';
+    document.getElementById('panel3').querySelector('.panel-subtitle').textContent = 'We need your address for the back of the postcard.';
+  
+    // Replace the send button behaviour
+    const sendBtn = document.getElementById('sendBtn');
+    sendBtn.textContent = '💳 Pay $2.00 & Send to Madhumita!';
+    sendBtn.onclick = submitOwnerPostcard;
+    btn.disabled = false;
+    btn.textContent = '💳 Pay $2.00 & Send!';
+  }
+  
+  async function submitOwnerPostcard() {
+    const saved = sessionStorage.getItem('ownerPostcard');
+    if (!saved) return;
+    const { message } = JSON.parse(saved);
+  
+    const fields = ['fromName','fromAddress','fromCity','fromZip','fromCountry'];
+    for (const f of fields) {
+      if (!document.getElementById(f).value.trim()) {
+        alert('Please fill in all your details 🙋');
+        return;
+      }
+    }
+  
+    const btn = document.getElementById('sendBtn');
+    btn.disabled = true;
+    btn.textContent = '⏳ Setting up payment...';
+  
+    const payload = {
+      message,
+      from: {
+        name:     document.getElementById('fromName').value.trim(),
+        address:  document.getElementById('fromAddress').value.trim(),
+        address2: document.getElementById('fromAddress2').value.trim(),
+        city:     document.getElementById('fromCity').value.trim(),
+        state:    document.getElementById('fromState').value.trim(),
+        zip:      document.getElementById('fromZip').value.trim(),
+        country:  document.getElementById('fromCountry').value.trim()
+      }
+    };
+  
+    try {
+      const res = await fetch('/api/send-to-owner', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+  
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Payment setup failed');
+      sessionStorage.removeItem('ownerPostcard');
+      window.location.href = data.url;
+  
+    } catch(err) {
+      document.getElementById('errorMsg').textContent = '⚠️ ' + err.message;
+      document.getElementById('errorMsg').classList.add('show');
+      btn.disabled = false;
+      btn.textContent = '💳 Pay $2.00 & Send to Madhumita!';
+    }
+  }
+
+  
 
 </script>
 
