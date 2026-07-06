@@ -1600,7 +1600,7 @@ footer a { color: var(--burgundy); text-decoration: none; }
 
       const payload = {
         message: document.getElementById('message').value.trim(),
-        frontImage: uploadedImageBase64 || null,
+        frontImage: imageURL,
         to: {
           name: document.getElementById('toName').value.trim(),
           address: document.getElementById('toAddress').value.trim(),
