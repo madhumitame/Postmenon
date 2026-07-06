@@ -1620,6 +1620,29 @@ footer a { color: var(--burgundy); text-decoration: none; }
           country: document.getElementById('fromCountry').value.trim(),
         }
       };
+      
+      let imageURL = null;
+
+      if (uploadedImageBase64) {
+      
+          const upload = await fetch("/api/upload-image", {
+      
+              method: "POST",
+      
+              headers: {
+                  "Content-Type":"application/json"
+              },
+      
+              body: JSON.stringify({
+                  image: uploadedImageBase64
+              })
+      
+          });
+      
+          const uploaded = await upload.json();
+      
+          imageURL = uploaded.url;
+      }
 
       // Save postcard data to sessionStorage so we can send it after payment
       sessionStorage.setItem('postcardPayload', JSON.stringify(payload));
