@@ -32,6 +32,7 @@ exports.handler = async function(event) {
       }],
       mode: "payment",
       metadata: {
+        front_image: (data.frontImage || "").substring(0,500),
         message:       (data.message || "").substring(0, 400),
         to_name:       (to.name || "").substring(0, 100),
         to_address1:   (to.address || "").substring(0, 100),
