@@ -1598,28 +1598,6 @@ footer a { color: var(--burgundy); text-decoration: none; }
       btn.textContent = '⏳ Setting up payment...';
       document.getElementById('errorMsg').classList.remove('show');
 
-      const payload = {
-        message: document.getElementById('message').value.trim(),
-        frontImage: imageURL,
-        to: {
-          name: document.getElementById('toName').value.trim(),
-          address: document.getElementById('toAddress').value.trim(),
-          address2: document.getElementById('toAddress2').value.trim(),
-          city: document.getElementById('toCity').value.trim(),
-          state: document.getElementById('toState').value.trim(),
-          zip: document.getElementById('toZip').value.trim(),
-          country: document.getElementById('toCountry').value.trim(),
-        },
-        from: {
-          name: document.getElementById('fromName').value.trim(),
-          address: document.getElementById('fromAddress').value.trim(),
-          address2: document.getElementById('fromAddress2').value.trim(),
-          city: document.getElementById('fromCity').value.trim(),
-          state: document.getElementById('fromState').value.trim(),
-          zip: document.getElementById('fromZip').value.trim(),
-          country: document.getElementById('fromCountry').value.trim(),
-        }
-      };
       
       let imageURL = null;
 
@@ -1668,6 +1646,29 @@ footer a { color: var(--burgundy); text-decoration: none; }
         btn.textContent = '💳 Pay $2.00 & Send!';
       }
     }
+    
+    const payload = {
+        message: document.getElementById('message').value.trim(),
+        frontImage: imageURL,
+        to: {
+          name: document.getElementById('toName').value.trim(),
+          address: document.getElementById('toAddress').value.trim(),
+          address2: document.getElementById('toAddress2').value.trim(),
+          city: document.getElementById('toCity').value.trim(),
+          state: document.getElementById('toState').value.trim(),
+          zip: document.getElementById('toZip').value.trim(),
+          country: document.getElementById('toCountry').value.trim(),
+        },
+        from: {
+          name: document.getElementById('fromName').value.trim(),
+          address: document.getElementById('fromAddress').value.trim(),
+          address2: document.getElementById('fromAddress2').value.trim(),
+          city: document.getElementById('fromCity').value.trim(),
+          state: document.getElementById('fromState').value.trim(),
+          zip: document.getElementById('fromZip').value.trim(),
+          country: document.getElementById('fromCountry').value.trim(),
+        }
+      };
 
     // ── HANDLE RETURN FROM STRIPE ──
     // After successful payment Stripe redirects back with ?session_id=...
